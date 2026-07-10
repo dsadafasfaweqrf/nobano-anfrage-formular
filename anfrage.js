@@ -160,6 +160,7 @@ function collectData() {
       desiredDate: values.get("desiredDate") || "",
       notes: values.get("contactNotes") || ""
     },
+    logoFileName: document.getElementById("logoFile").files[0]?.name || "",
     submittedAt: new Date().toISOString(),
     source: prefill.source || { channel: "Link" }
   };
@@ -213,7 +214,10 @@ async function submitForm(event) {
     } else {
       const saved = JSON.parse(localStorage.getItem("nobano-demo-submissions") || "[]");
       localStorage.setItem("nobano-demo-submissions", JSON.stringify([data, ...saved].slice(0, 20)));
-      document.getElementById("success-message").textContent = "Die Formularvorschau wurde erfolgreich abgeschlossen. Für den Live-Betrieb muss noch der Empfangs-Endpunkt in anfrage-config.js eingetragen werden.";
+      const whatsappLink = document.getElementById("whatsapp-confirm");
+      whatsappLink.href = `https://wa.me/4915754223894?text=${encodeURIComponent(buildWhatsAppConfirmation(data))}`;
+      whatsappLink.hidden = false;
+      document.getElementById("success-message").textContent = "Deine Angaben sind vorbereitet. Bitte sende die Zusammenfassung jetzt noch per WhatsApp an Nobano.";
     }
 
     document.getElementById("intake-form").hidden = true;
@@ -226,6 +230,31 @@ async function submitForm(event) {
     button.disabled = false;
     button.innerHTML = original;
   }
+}
+
+function buildWhatsAppConfirmation(data) {
+  const customer = [data.customer.firstName, data.customer.lastName].filter(Boolean).join(" ") || data.customer.company || "Nicht angegeben";
+  const products = data.products.map((product, index) => {
+    const category = product.category === "Sonstiges" ? product.otherCategory || "Sonstiges" : product.category || "Noch offen";
+    return `${index + 1}. ${product.quantity || "?"} × ${category}; Größen: ${product.sizes || "offen"}; Farbe: ${product.color || "offen"}`;
+  }).join("\n");
+  return [
+    `Hallo Nobano, hier ist meine bestätigte Anfrage ${data.orderId}:`,
+    "",
+    `Kunde: ${customer}`,
+    data.customer.company ? `Firma/Verein: ${data.customer.company}` : "",
+    "",
+    "Textilien:",
+    products,
+    "",
+    `Veredelung: ${data.embellishment.type || "offen"}`,
+    `Position: ${data.embellishment.positions.join(", ") || "offen"}`,
+    `Logo: ${data.embellishment.logoStatus || "offen"}`,
+    data.logoFileName ? `Logo-Datei: ${data.logoFileName} – bitte im Chat anhängen` : "",
+    `Kontakt: ${data.contact.email || data.contact.phone || "offen"}`,
+    `Wunschtermin: ${data.contact.desiredDate || "offen"}`,
+    data.contact.notes ? `Hinweise: ${data.contact.notes}` : ""
+  ].filter((line) => line !== "").join("\n");
 }
 
 function setValue(id, value) {
