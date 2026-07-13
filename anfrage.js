@@ -167,77 +167,93 @@ function garmentTypeForCategory(category) {
 }
 
 function garmentSvg(type, side, category) {
-  const id = `${type}-${side}`;
   return `
-    <svg class="garment-svg garment-${type}" viewBox="0 0 250 300" role="img" aria-label="${escapeAttr(category)} ${side === "front" ? "Vorderseite" : "Rückseite"}">
-      <defs>
-        <linearGradient id="fabric-${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#eef3ef"/></linearGradient>
-        <filter id="shadow-${id}" x="-25%" y="-20%" width="150%" height="155%"><feDropShadow dx="0" dy="8" stdDeviation="7" flood-color="#183b2a" flood-opacity=".13"/></filter>
-      </defs>
-      ${garmentDrawing(type, side, id)}
+    <svg class="garment-svg garment-${type}" viewBox="0 0 320 330" role="img" aria-label="${escapeAttr(category)} ${side === "front" ? "Vorderseite" : "Rückseite"}">
+      ${garmentDrawing(type, side)}
       ${garmentZones(type, side)}
     </svg>
   `;
 }
 
-function garmentDrawing(type, side, id) {
-  const shortBody = "M79 38 39 58 15 116l35 17 18-31v160h114V102l18 31 35-17-24-58-40-20c-10 19-25 28-46 28S89 57 79 38Z";
-  const longBody = "M82 40 52 55 28 80 8 205l31 8 30-107 5 158h102l5-158 30 107 31-8-20-125-24-25-30-15c-10 17-24 25-43 25s-33-8-43-25Z";
-  const body = (path) => `<path class="garment-body" filter="url(#shadow-${id})" fill="url(#fabric-${id})" d="${path}"/>`;
-  const shortSeams = '<path class="garment-detail" d="M79 38c9 19 25 28 46 28s36-9 46-28M68 102 50 133M182 102l18 31"/>';
-  const longSeams = '<path class="garment-detail" d="M82 40c10 17 24 25 43 25s33-8 43-25M69 106 39 213M181 106l30 107"/>';
+function garmentDrawing(type, side) {
+  const shortBody = "M110 35 69 53 31 81 12 135 53 157 78 119 78 300H242V119l25 38 41-22-19-54-38-28-41-18c-8 24-25 36-50 36s-42-12-50-36Z";
+  const longBody = "M112 38 70 57 40 87 12 246l40 9 32-122v168h152V133l32 122 40-9-28-159-30-30-42-19c-8 21-24 32-48 32s-40-11-48-32Z";
+  const body = (path) => `<path class="garment-body" d="${path}"/>`;
+  const shortSeams = `
+    <path class="garment-detail" d="M110 35c8 24 25 36 50 36s42-12 50-36M78 119 53 157M242 119l25 38"/>
+    <path class="garment-stitch" d="M20 133l34 18M266 151l34-18M83 292h154"/>
+  `;
+  const longSeams = `
+    <path class="garment-detail" d="M112 38c8 21 24 32 48 32s40-11 48-32M84 133 52 255M236 133l32 122"/>
+    <path class="garment-stitch" d="M20 241l33 8M267 249l33-8M89 291h142"/>
+  `;
 
   if (type === "cap") {
     return side === "front"
-      ? `<path class="garment-body" filter="url(#shadow-${id})" fill="url(#fabric-${id})" d="M53 157c6-54 36-83 75-83 39 0 68 29 73 83H53Z"/><path class="garment-detail" d="M128 74v83M53 157h148M80 151c-13 1-32 8-49 22 53 4 102-1 137-16"/>`
-      : `<path class="garment-body" filter="url(#shadow-${id})" fill="url(#fabric-${id})" d="M55 158c8-54 39-84 80-84 38 0 65 29 68 84H55Z"/><path class="garment-detail" d="M135 74c18 17 27 46 26 84M55 158h148M162 157c22 1 42 6 58 15-24 7-48 7-72-1"/>`;
+      ? `<path class="garment-body" d="M70 188c8-73 47-112 94-112 48 0 84 39 90 112H70Z"/><path class="garment-detail" d="M164 76v112M70 188h184M105 181c-19 1-43 11-65 29 69 5 133-2 179-22"/>`
+      : `<path class="garment-body" d="M72 188c10-73 49-112 98-112 46 0 81 39 85 112H72Z"/><path class="garment-detail" d="M170 76c23 23 34 61 32 112M72 188h183M202 187c29 1 53 8 74 21-31 9-61 9-91-2"/>`;
   }
   if (type === "beanie") {
-    return `<path class="garment-body" filter="url(#shadow-${id})" fill="url(#fabric-${id})" d="M67 187c0-69 20-112 58-112s58 43 58 112H67Z"/><path class="garment-detail" d="M67 164h116v31H67zM86 92c12-11 25-17 39-17s27 6 39 17"/>`;
+    return `<path class="garment-body" d="M83 224c0-93 28-150 77-150s77 57 77 150H83Z"/><path class="garment-rib" d="M83 194h154v42H83z"/><path class="garment-detail" d="M108 96c15-15 32-22 52-22s37 7 52 22"/>`;
   }
   if (type === "bag") {
-    return `<path class="garment-body" filter="url(#shadow-${id})" fill="url(#fabric-${id})" d="M63 91h124l15 172H48L63 91Z"/><path class="garment-detail" d="M91 98c0-35 12-53 34-53s34 18 34 53M63 116h124${side === "front" ? "M78 225h94" : ""}"/>`;
+    return `<path class="garment-body" d="M82 91h156l19 210H63L82 91Z"/><path class="garment-detail" d="M117 100c0-47 15-70 43-70s43 23 43 70M82 122h156${side === "front" ? "M102 250h116" : ""}"/>`;
   }
   if (type === "apron") {
-    return `<path class="garment-body" filter="url(#shadow-${id})" fill="url(#fabric-${id})" d="M91 58h68l13 52 22 155H56l22-155 13-52Z"/><path class="garment-detail" d="M91 58c3-25 14-38 34-38s31 13 34 38M78 110 36 86M172 110l42-24${side === "front" ? "M82 203h86v42H82z" : ""}"/>`;
+    return `<path class="garment-body" d="M116 55h88l16 66 29 180H71l29-180 16-66Z"/><path class="garment-detail" d="M116 55c4-34 19-50 44-50s40 16 44 50M100 121 46 90M220 121l54-31${side === "front" ? "M105 224h110v54H105z" : ""}"/>`;
   }
   if (type === "vest") {
-    return `${body("M82 40 63 53 72 99v165h106V99l9-46-19-13c-10 17-24 25-43 25s-33-8-43-25Z")}<path class="garment-detail" d="M82 40c10 17 24 25 43 25s33-8 43-25M72 99l18-42M178 99l-18-42${side === "front" ? "M125 66v198" : ""}"/>`;
+    return `${body("M112 38 84 56l12 58v187h128V114l12-58-28-18c-8 21-24 32-48 32s-40-11-48-32Z")}<path class="garment-detail" d="M112 38c8 21 24 32 48 32s40-11 48-32M96 114l24-66M224 114l-24-66${side === "front" ? "M160 70v231" : ""}"/>`;
   }
-  if (type === "sweatshirt") return `${body(longBody)}${longSeams}<path class="garment-detail" d="M99 47c7 10 15 15 26 15s19-5 26-15M18 128l25 18M232 128l-25 18"/>`;
-  if (type === "hoodie") return `<path class="garment-body garment-hood" fill="url(#fabric-${id})" d="M91 56c-3-29 9-46 34-46s37 17 34 46c-9 12-21 18-34 18s-25-6-34-18Z"/>${body(longBody)}${longSeams}<path class="garment-detail" d="M91 56c9 12 21 18 34 18s25-6 34-18${side === "front" ? "M86 205h78l-10 38H96l-10-38ZM125 65v57" : ""}"/>`;
-  if (type === "jacket") return `${body(longBody)}${longSeams}<path class="garment-detail" d="M99 46 125 70l26-24M125 70v194${side === "front" ? "M84 190h28M138 190h28" : ""}"/>`;
-  if (type === "shirt") return `${body(shortBody)}${shortSeams}<path class="garment-detail" d="M91 45 112 74l13-13 13 13 21-29M125 61v203${side === "front" ? "M125 97h.1M125 124h.1M125 151h.1M125 178h.1" : ""}"/>`;
-  if (type === "polo") return `${body(shortBody)}${shortSeams}<path class="garment-detail" d="M91 44 112 71l13-10 13 10 21-27M112 71h26M125 62v48${side === "front" ? "M125 83h.1M125 96h.1" : ""}"/>`;
-  return `${body(shortBody)}${shortSeams}`;
+  if (type === "sweatshirt") return `
+    ${body(longBody)}${longSeams}
+    <path class="garment-rib" d="M84 282h152v19H84zM13 235l40 9-3 18-40-9zM267 244l40-9 3 18-40 9z"/>
+    <path class="garment-detail" d="${side === "front" ? "M130 48c8 9 18 13 30 13s22-4 30-13" : "M128 47c9 7 20 11 32 11s23-4 32-11"}"/>
+  `;
+  if (type === "hoodie") return `<path class="garment-hood" d="M116 59c-4-38 11-56 44-56s48 18 44 56c-12 15-27 22-44 22s-32-7-44-22Z"/>${body(longBody)}${longSeams}<path class="garment-detail" d="M116 59c12 15 27 22 44 22s32-7 44-22${side === "front" ? "M111 228h98l-13 50h-72l-13-50ZM160 79v63" : ""}"/>`;
+  if (type === "jacket") return `${body(longBody)}${longSeams}<path class="garment-detail" d="M128 46 160 76l32-30M160 76v225${side === "front" ? "M107 211h34M179 211h34" : ""}"/>`;
+  if (type === "shirt") return `${body(shortBody)}${shortSeams}<path class="garment-detail" d="M116 42 144 77l16-14 16 14 28-35M160 63v237${side === "front" ? "M160 106h.1M160 140h.1M160 174h.1M160 208h.1" : ""}"/>`;
+  if (type === "polo") return `
+    ${body(shortBody)}${shortSeams}
+    ${side === "front" ? `
+      <path class="garment-rib" d="M111 37 141 75l19-13-18-24-22-10ZM209 37l-30 38-19-13 18-24 22-10Z"/>
+      <path class="garment-detail" d="M145 71h30v48h-30zM153 78h14"/>
+      <circle class="garment-button" cx="160" cy="89" r="2.3"/><circle class="garment-button" cx="160" cy="105" r="2.3"/>
+    ` : `<path class="garment-rib" d="M113 37c9 17 25 25 47 25s38-8 47-25l-9-4c-8 13-21 19-38 19s-30-6-38-19Z"/>`}
+    <path class="garment-rib" d="M24 133l34 18-7 13-35-18zM262 151l34-18 8 13-35 18z"/>
+  `;
+  return `
+    ${body(shortBody)}${shortSeams}
+    <path class="garment-detail" d="${side === "front" ? "M126 45c7 12 18 18 34 18s27-6 34-18" : "M124 43c9 9 21 14 36 14s27-5 36-14"}"/>
+  `;
 }
 
 function garmentZones(type, side) {
   if (type === "cap" || type === "beanie") {
     return side === "front"
-      ? '<rect class="placement-zone" data-position="Cap vorne" x="96" y="112" width="58" height="38" rx="5"/>'
-      : '<rect class="placement-zone" data-position="Cap seitlich" x="135" y="112" width="38" height="38" rx="5"/>';
+      ? '<rect class="placement-zone" data-position="Vorderseite groß" x="122" y="124" width="76" height="52" rx="2"/>'
+      : '';
   }
   if (type === "bag" || type === "apron") {
-    return '<rect class="placement-zone" data-position="Vorderseite groß" x="86" y="125" width="78" height="104" rx="6"/><rect class="placement-zone" data-position="Sonstiges" x="94" y="195" width="62" height="42" rx="5"/>';
+    return side === "front" ? '<rect class="placement-zone" data-position="Vorderseite groß" x="112" y="145" width="96" height="118" rx="2"/>' : '';
   }
   if (side === "back") {
     return `
-      <rect class="placement-zone" data-position="Nacken" x="105" y="72" width="40" height="15" rx="4"/>
-      <rect class="placement-zone" data-position="Rücken oben" x="82" y="103" width="86" height="28" rx="5"/>
-      <rect class="placement-zone" data-position="Rücken groß" x="91" y="137" width="68" height="94" rx="6"/>
-      <rect class="placement-zone" data-position="Rücken unten" x="82" y="235" width="86" height="19" rx="4"/>
+      <rect class="placement-zone" data-position="Nacken" x="137" y="76" width="46" height="16" rx="2"/>
+      <rect class="placement-zone" data-position="Rücken oben" x="103" y="105" width="114" height="32" rx="2"/>
+      <rect class="placement-zone" data-position="Rücken groß" x="117" y="148" width="86" height="108" rx="2"/>
+      <rect class="placement-zone" data-position="Rücken unten" x="105" y="269" width="110" height="20" rx="2"/>
     `;
   }
   const longSleeves = ["sweatshirt", "hoodie", "jacket"].includes(type);
   return `
-    <rect class="placement-zone" data-position="Brust rechts" x="77" y="103" width="36" height="26" rx="4"/>
-    <rect class="placement-zone" data-position="Brust links" x="137" y="103" width="36" height="26" rx="4"/>
-    <rect class="placement-zone" data-position="Brust mittig" x="106" y="104" width="38" height="25" rx="4"/>
-    <rect class="placement-zone" data-position="Vorderseite groß" x="94" y="139" width="62" height="91" rx="6"/>
+    <rect class="placement-zone" data-position="Brust rechts" x="94" y="101" width="42" height="32" rx="2"/>
+    <rect class="placement-zone" data-position="Brust links" x="184" y="101" width="42" height="32" rx="2"/>
+    <rect class="placement-zone" data-position="Brust mittig" x="139" y="101" width="42" height="32" rx="2"/>
+    <rect class="placement-zone" data-position="Vorderseite groß" x="120" y="151" width="80" height="108" rx="2"/>
     ${longSleeves
-      ? '<path class="placement-zone" data-position="Ärmel rechts" d="M27 92 49 99 31 186 13 181Z"/><path class="placement-zone" data-position="Ärmel links" d="m223 92-22 7 18 87 18-5Z"/>'
-      : '<path class="placement-zone" data-position="Ärmel rechts" d="M39 72 66 86 53 116 25 102Z"/><path class="placement-zone" data-position="Ärmel links" d="m211 72-27 14 13 30 28-14Z"/>'}
+      ? '<path class="placement-zone" data-position="Ärmel rechts" d="M42 105 65 112 43 208 22 203Z"/><path class="placement-zone" data-position="Ärmel links" d="m278 105-23 7 22 96 21-5Z"/>'
+      : '<path class="placement-zone" data-position="Ärmel rechts" d="M38 88 66 103 53 136 24 121Z"/><path class="placement-zone" data-position="Ärmel links" d="m282 88-28 15 13 33 29-15Z"/>'}
   `;
 }
 
