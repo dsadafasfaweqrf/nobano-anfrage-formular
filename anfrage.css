@@ -195,16 +195,38 @@ body { background: radial-gradient(circle at 12% 0, #edf4ef 0, transparent 28%),
 .garment-card-head > span { height: 30px; width: 30px; }
 .garment-card-head strong { font-size: 10px; }
 .garment-card-head small { font-size: 9px; }
-.garment-canvas { align-items: center; display: flex; height: 330px; justify-content: center; margin-top: -2px; position: relative; }
+.garment-canvas { align-items: center; display: flex; height: 350px; justify-content: center; margin-top: -2px; position: relative; }
 .garment-canvas::before { background: linear-gradient(90deg, transparent, #f8faf8 50%, transparent); content: ""; inset: 12% 4% 4%; position: absolute; }
-.garment-svg { height: 100%; max-width: 330px; overflow: visible; position: relative; width: 100%; }
-.garment-body, .garment-hood { fill: #fefefe; stroke: #28352e; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.65; vector-effect: non-scaling-stroke; }
-.garment-detail { fill: none; stroke: #8d9991; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.05; vector-effect: non-scaling-stroke; }
-.garment-rib { fill: #f8faf8; stroke: #69776e; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.05; vector-effect: non-scaling-stroke; }
-.garment-stitch { fill: none; stroke: #aeb7b1; stroke-dasharray: 2.2 2.2; stroke-linecap: round; stroke-width: .85; vector-effect: non-scaling-stroke; }
-.garment-button { fill: #fff; stroke: #65736a; stroke-width: 1; vector-effect: non-scaling-stroke; }
-.placement-zone { fill: #aab9ac; opacity: 0; pointer-events: none; stroke: #4f7f63; stroke-width: 1.1; transform: scale(.84); transform-box: fill-box; transform-origin: center; transition: opacity .16s ease, transform .2s cubic-bezier(.2,.8,.2,1); vector-effect: non-scaling-stroke; }
-.placement-zone.active { filter: drop-shadow(0 3px 4px rgba(40,78,55,.14)); opacity: .64; transform: scale(1); }
+.garment-image-stage { aspect-ratio: 1; background: #fff; isolation: isolate; max-height: 340px; max-width: 340px; overflow: hidden; position: relative; width: 100%; }
+.garment-art { height: 100%; inset: 0; object-fit: contain; position: absolute; width: 100%; z-index: 1; }
+.garment-empty { align-items: center; color: #7d8981; display: flex; flex-direction: column; gap: 5px; justify-content: center; min-height: 250px; padding: 30px; text-align: center; }
+.garment-empty strong { color: #536158; font-size: 12px; }
+.garment-empty span { font-size: 10px; max-width: 230px; }
+.placement-zone { border-radius: 3px; height: 10%; mix-blend-mode: multiply; object-fit: fill; opacity: 0; pointer-events: none; position: absolute; transform: scale(.84); transform-origin: center; transition: opacity .16s ease, transform .2s cubic-bezier(.2,.8,.2,1); width: 12%; z-index: 2; }
+.placement-zone.active { opacity: .72; transform: scale(1); }
+.zone-chest-right { left: 34%; top: 26%; }
+.zone-chest-left { left: 54%; top: 26%; }
+.zone-chest-center { left: 44%; top: 26%; }
+.zone-front-large { height: 31%; left: 38%; top: 39%; width: 24%; }
+.zone-sleeve-right { height: 25%; left: 10%; top: 31%; transform: rotate(8deg) scale(.84); width: 9%; }
+.zone-sleeve-left { height: 25%; left: 81%; top: 31%; transform: rotate(-8deg) scale(.84); width: 9%; }
+.zone-sleeve-right.active { transform: rotate(8deg) scale(1); }
+.zone-sleeve-left.active { transform: rotate(-8deg) scale(1); }
+.garment-tshirt .zone-sleeve-right, .garment-polo .zone-sleeve-right, .garment-jersey .zone-sleeve-right { height: 10%; left: 13%; top: 24%; transform: rotate(-24deg) scale(.84); width: 14%; }
+.garment-tshirt .zone-sleeve-left, .garment-polo .zone-sleeve-left, .garment-jersey .zone-sleeve-left { height: 10%; left: 73%; top: 24%; transform: rotate(24deg) scale(.84); width: 14%; }
+.garment-tshirt .zone-sleeve-right.active, .garment-polo .zone-sleeve-right.active, .garment-jersey .zone-sleeve-right.active { transform: rotate(-24deg) scale(1); }
+.garment-tshirt .zone-sleeve-left.active, .garment-polo .zone-sleeve-left.active, .garment-jersey .zone-sleeve-left.active { transform: rotate(24deg) scale(1); }
+.garment-hoodie .zone-chest-right, .garment-hoodie .zone-chest-left, .garment-hoodie .zone-chest-center { top: 31%; }
+.garment-hoodie .zone-front-large { top: 43%; }
+.zone-nape { height: 5%; left: 45%; top: 18%; width: 10%; }
+.zone-back-upper { height: 9%; left: 34%; top: 27%; width: 32%; }
+.zone-back-large { height: 33%; left: 38%; top: 39%; width: 24%; }
+.zone-back-lower { height: 6%; left: 34%; top: 75%; width: 32%; }
+.garment-hoodie .zone-nape { top: 29%; }
+.garment-hoodie .zone-back-upper { top: 35%; }
+.garment-hoodie .zone-back-large { top: 45%; }
+.zone-accessory-front { height: 18%; left: 35%; top: 40%; width: 30%; }
+.zone-object-front, .zone-object-back { height: 36%; left: 35%; top: 38%; width: 30%; }
 .position-controls { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 14px; }
 .position-control-group { background: #fafbfa; border: 1px solid #dfe6e0; border-radius: 16px; padding: 15px; }
 .position-control-group-wide { grid-column: 1 / -1; }
