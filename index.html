@@ -86,9 +86,9 @@
             <p>Klicke auf alle gewünschten Flächen.</p>
             <div class="garment-grid">
               <div class="garment-card">
-                <strong>Vorderseite</strong>
+                <div class="garment-card-head"><span>01</span><div><strong>Vorderseite</strong><small>Brust & Vorderseite</small></div></div>
                 <div class="garment">
-                  <svg viewBox="0 0 250 290" aria-hidden="true"><path d="M79 34 38 55 14 112l36 17 18-31v158h114V98l18 31 36-17-24-57-41-21c-10 19-25 28-46 28S89 53 79 34Z"/><path d="M79 34c9 19 25 28 46 28s36-9 46-28"/></svg>
+                  <svg viewBox="0 0 250 290" aria-hidden="true"><defs><linearGradient id="shirt-front" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#edf4ef"/></linearGradient><filter id="shirt-front-shadow" x="-20%" y="-15%" width="140%" height="145%"><feDropShadow dx="0" dy="8" stdDeviation="7" flood-color="#173d29" flood-opacity=".12"/></filter></defs><path class="shirt-body" filter="url(#shirt-front-shadow)" fill="url(#shirt-front)" d="M79 34 38 55 14 112l36 17 18-31v158h114V98l18 31 36-17-24-57-41-21c-10 19-25 28-46 28S89 53 79 34Z"/><path class="shirt-detail" d="M79 34c9 19 25 28 46 28s36-9 46-28M68 98 50 129M182 98l18 31"/></svg>
                   <label class="hotspot front-left"><input type="checkbox" name="positions" value="Brust links"><span>Brust links</span></label>
                   <label class="hotspot front-right"><input type="checkbox" name="positions" value="Brust rechts"><span>Brust rechts</span></label>
                   <label class="hotspot front-center"><input type="checkbox" name="positions" value="Brust mittig"><span>Brust mittig</span></label>
@@ -96,9 +96,9 @@
                 </div>
               </div>
               <div class="garment-card">
-                <strong>Rückseite</strong>
+                <div class="garment-card-head"><span>02</span><div><strong>Rückseite</strong><small>Nacken & Rücken</small></div></div>
                 <div class="garment">
-                  <svg viewBox="0 0 250 290" aria-hidden="true"><path d="M79 34 38 55 14 112l36 17 18-31v158h114V98l18 31 36-17-24-57-41-21c-10 8-25 12-46 12s-36-4-46-12Z"/><path d="M88 36c12 12 25 17 37 17s25-5 37-17"/></svg>
+                  <svg viewBox="0 0 250 290" aria-hidden="true"><defs><linearGradient id="shirt-back" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#edf4ef"/></linearGradient><filter id="shirt-back-shadow" x="-20%" y="-15%" width="140%" height="145%"><feDropShadow dx="0" dy="8" stdDeviation="7" flood-color="#173d29" flood-opacity=".12"/></filter></defs><path class="shirt-body" filter="url(#shirt-back-shadow)" fill="url(#shirt-back)" d="M79 34 38 55 14 112l36 17 18-31v158h114V98l18 31 36-17-24-57-41-21c-10 8-25 12-46 12s-36-4-46-12Z"/><path class="shirt-detail" d="M88 36c12 12 25 17 37 17s25-5 37-17M68 98 50 129M182 98l18 31"/></svg>
                   <label class="hotspot back-neck"><input type="checkbox" name="positions" value="Nacken"><span>Nacken</span></label>
                   <label class="hotspot back-top"><input type="checkbox" name="positions" value="Rücken oben"><span>Rücken oben</span></label>
                   <label class="hotspot back-large"><input type="checkbox" name="positions" value="Rücken groß"><span>Rücken groß</span></label>
@@ -106,6 +106,7 @@
                 </div>
               </div>
             </div>
+            <div class="more-positions-head"><strong>Weitere Positionen</strong><span>Ärmel, Hosen und Accessoires</span></div>
             <div class="more-positions">
               <label><input type="checkbox" name="positions" value="Ärmel links"><span>Ärmel links</span></label>
               <label><input type="checkbox" name="positions" value="Ärmel rechts"><span>Ärmel rechts</span></label>

@@ -83,23 +83,41 @@ button { color: inherit; }
 .upload b { font-size: 11px; }
 .upload small { color: #818b83; font-size: 9px; }
 .upload em { color: var(--green); font-size: 10px; font-style: normal; margin-top: 4px; }
-.position-section > p { color: var(--muted); font-size: 10px; margin: -5px 0 12px; }
-.garment-grid { display: grid; gap: 14px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.garment-card { background: #f7f8f5; border: 1px solid #dce2dc; border-radius: 14px; padding: 14px; text-align: center; }
-.garment-card > strong { color: #667269; font-size: 10px; text-transform: uppercase; }
-.garment { height: 310px; margin: 8px auto 0; max-width: 290px; position: relative; }
-.garment svg { fill: #fff; height: 100%; stroke: #bdc8c0; stroke-linejoin: round; stroke-width: 2; width: 100%; }
-.hotspot { cursor: pointer; left: 50%; position: absolute; transform: translate(-50%, -50%); }
+.position-section > p { color: var(--muted); font-size: 11px; margin: -5px 0 15px; }
+.garment-grid { display: grid; gap: 16px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.garment-card { background: linear-gradient(145deg, #fbfcfa 0%, #f0f4f0 100%); border: 1px solid #d5dfd7; border-radius: 18px; box-shadow: 0 8px 24px rgba(22,92,59,.055); overflow: hidden; padding: 16px 16px 10px; }
+.garment-card-head { align-items: center; display: flex; gap: 10px; text-align: left; }
+.garment-card-head > span { align-items: center; background: #e3eee6; border-radius: 9px; color: var(--green); display: flex; font-size: 9px; font-weight: 850; height: 32px; justify-content: center; width: 32px; }
+.garment-card-head strong, .garment-card-head small { display: block; }
+.garment-card-head strong { color: #30453a; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+.garment-card-head small { color: #88948c; font-size: 9px; margin-top: 1px; }
+.garment { height: 300px; margin: 0 auto; max-width: 300px; position: relative; }
+.garment::before { background: radial-gradient(circle, rgba(64,127,91,.09), rgba(64,127,91,0) 67%); content: ""; inset: 15% 4% 5%; position: absolute; }
+.garment svg { height: 100%; overflow: visible; position: relative; width: 100%; }
+.shirt-body { stroke: #9fb4a6; stroke-linejoin: round; stroke-width: 1.8; }
+.shirt-detail { fill: none; stroke: #b8c8bd; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.6; }
+.hotspot { cursor: pointer; left: 50%; position: absolute; transform: translate(-50%, -50%); z-index: 2; }
 .hotspot input { height: 1px; opacity: 0; position: absolute; width: 1px; }
-.hotspot span { background: rgba(255,255,255,.94); border: 1px solid #b9c6bc; border-radius: 999px; box-shadow: 0 2px 7px rgba(25,45,33,.1); display: block; font-size: 9px; font-weight: 700; padding: 5px 8px; white-space: nowrap; }
-.hotspot input:checked + span { background: var(--green); border-color: var(--green); color: #fff; }
-.front-left { left: 40%; top: 32%; }.front-right { left: 60%; top: 32%; }.front-center { top: 43%; }.front-large { top: 60%; }
-.back-neck { top: 17%; }.back-top { top: 34%; }.back-large { top: 54%; }.back-low { top: 73%; }
-.more-positions { display: grid; gap: 7px; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 12px; }
+.hotspot span { align-items: center; backdrop-filter: blur(5px); background: rgba(255,255,255,.91); border: 1px solid #aec1b3; border-radius: 999px; box-shadow: 0 4px 12px rgba(25,45,33,.11); color: #31473b; display: flex; font-size: 10px; font-weight: 750; gap: 6px; padding: 6px 9px 6px 7px; transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease; white-space: nowrap; }
+.hotspot span::before { background: #e2ece5; border: 1px solid #afc2b5; border-radius: 50%; content: ""; height: 9px; width: 9px; }
+.hotspot:hover span { border-color: #5f9474; box-shadow: 0 5px 16px rgba(22,92,59,.16); transform: translateY(-1px); }
+.hotspot input:focus-visible + span { outline: 3px solid rgba(57,132,94,.2); outline-offset: 2px; }
+.hotspot input:checked + span { background: var(--green); border-color: var(--green); box-shadow: 0 5px 15px rgba(22,92,59,.25); color: #fff; }
+.hotspot input:checked + span::before { align-items: center; background: #fff; border-color: #fff; color: var(--green); content: "✓"; display: flex; font-size: 7px; font-weight: 950; justify-content: center; }
+.front-left { left: 33%; top: 33%; }.front-right { left: 67%; top: 33%; }.front-center { top: 45%; }.front-large { top: 63%; }
+.back-neck { top: 19%; }.back-top { top: 36%; }.back-large { top: 56%; }.back-low { top: 74%; }
+.more-positions-head { align-items: flex-end; display: flex; justify-content: space-between; margin: 22px 2px 9px; }
+.more-positions-head strong { color: #4f5b53; font-size: 11px; }
+.more-positions-head span { color: #8a948d; font-size: 9px; }
+.more-positions { display: grid; gap: 8px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .more-positions label { cursor: pointer; }
 .more-positions input { height: 1px; opacity: 0; position: absolute; width: 1px; }
-.more-positions span { background: #f8f9f7; border: 1px solid #d3dad4; border-radius: 8px; display: block; font-size: 9px; font-weight: 700; padding: 8px; text-align: center; }
+.more-positions span { align-items: center; background: #fafbf9; border: 1px solid #d3dad4; border-radius: 10px; color: #47564d; display: flex; font-size: 10px; font-weight: 700; gap: 7px; justify-content: center; min-height: 39px; padding: 8px 9px; text-align: center; transition: .16s ease; }
+.more-positions span::before { align-items: center; background: #e8eee9; border-radius: 50%; color: #69786e; content: "+"; display: flex; flex: 0 0 auto; font-size: 11px; height: 17px; justify-content: center; width: 17px; }
+.more-positions label:hover span { border-color: #7da28b; transform: translateY(-1px); }
+.more-positions input:focus-visible + span { outline: 3px solid rgba(57,132,94,.16); outline-offset: 2px; }
 .more-positions input:checked + span { background: #e7f1ea; border-color: #39845e; color: var(--green); }
+.more-positions input:checked + span::before { background: var(--green); color: #fff; content: "✓"; }
 .summary-card { margin-top: 16px; }
 .summary-group { border-top: 1px solid #e4e8e4; padding: 14px 0; }
 .summary-group:first-child { border-top: 0; padding-top: 0; }
