@@ -62,7 +62,7 @@ function applyPrefill(data) {
   setValue("deliveryAddress", contact.deliveryAddress);
   setValue("desiredDate", contact.desiredDate);
   setValue("contactNotes", contact.notes);
-  setRadio("preferredChannel", contact.preferredChannel || "WhatsApp");
+  setRadio("preferredChannel", contact.preferredChannel || "");
 }
 
 function addProduct(product = {}) {
